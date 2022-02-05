@@ -1,0 +1,23 @@
+{% extends "email/base_mail.html"%}
+{% block title %}{% trans %}Greetings from {{ site_name }}{% endtrans %},{% endblock %}
+{% block headline %}{% trans %}Greetings from {{ site_name }}{% endtrans %},{% endblock %}
+
+{% block content %}
+
+<p>{% trans %}To recover your account, please follow the link below:{% endtrans %}</p>
+
+<p><a href="{{ validation_link }}" >{{ validation_link }}</a></p>
+
+<p>
+    {% trans %}If you are unable to follow the link, copy/paste this key into the form:{% endtrans %}
+    <span style="background: #e7e8e8; padding: 4px;">{{ key }}</span>
+</p>
+
+<p>
+{% trans %}If you believe that this message was sent erroneously - no further action is needed. We apologize for any inconvenience.{% endtrans %}
+</p>
+{% endblock %}
+
+{% block footer %}
+{% include "email/footer.html" %}
+{% endblock %}

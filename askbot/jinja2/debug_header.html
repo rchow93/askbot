@@ -1,0 +1,44 @@
+<style>
+  .debug-warning {
+    padding: 1rem;
+  }
+  .debug-warning em {
+    font-style: normal;
+    font-weight: bold;
+  }
+</style>
+{% if settings.USING_RUNSERVER %}
+  {% if settings.DEBUG == False %}
+  <div class="debug-warning">
+    <p>
+      You are seeing this message because you are using the <em>Django runserver</em>
+      and the <em>DEBUG</em> setting is <em>False</em>.
+    </p>
+    <p>
+      Runserver should not be used in the production.
+    </p>
+    <p>
+      If you do not see page the styling - set <em>DEBUG = True</em> or 
+      use <em>--insecure</em> flag with the runserver command.
+    </p>
+    <p>
+      To serve the static media in the production:
+    </p>
+    <ul>
+    </ul>
+      <li>configure your webserver to alias the urls starting with <em>{{ settings.STATIC_URL }}</em> to the directory <em>{{ settings.STATIC_ROOT }}</em>;
+      <li>run <em>python manage.py collectstatic</em></pre>.
+    </p>
+  </div>
+  {% endif %}
+{% else %}
+  {% if settings.DEBUG == True %}
+    <div class="debug-warning">
+      <p>
+        Debug mode is on, do not use it in the production.
+        To turn it off, set <em>DEBUG = False</em> in your 
+        <em>settings.py</em> file.
+      </p>
+    </div>
+  {% endif %}
+{% endif %}

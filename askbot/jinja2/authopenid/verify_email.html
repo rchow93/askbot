@@ -1,0 +1,17 @@
+{% extends "one_column_body.html" %}
+{% block title %}{% filter trim %}{% trans %}Confirm email address{% endtrans %}{% endfilter %}{% endblock %}
+{% block content %}
+    <h1 class="section-title">{% trans %}Confirm email address{% endtrans %}</h1>
+    <p style="margin-bottom: .25rem">{% trans %}Validation email sent. Please find it and follow the enclosed link.{% endtrans %}</p>
+    <p>{% trans %}If the link doesn't work - enter the emailed code below:{% endtrans %}</p>
+    <form method="post">{{ csrf_input }}
+        <input
+            id="validation-code"
+            name="validation_code"
+            placeholder="{% trans %}Validation code{% endtrans %}"
+            type="text"
+        />
+        <input type="submit" style="margin-left: .25rem" value="{% trans %}Continue{% endtrans %}" />
+    </form>
+{% endblock %}
+<!-- end changeemail.html -->

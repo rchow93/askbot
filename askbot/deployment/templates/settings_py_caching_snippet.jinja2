@@ -1,0 +1,14 @@
+#setup redis or memcached for production use!
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'askbot',
+    }
+}
+# Chose a unique KEY_PREFIX to avoid clashes with other applications
+# using the same cache (e.g. a shared memcache instance).
+CACHES['default'].update({'KEY_PREFIX': 'askbot', 'TIMEOUT': 6000})
+#sets a special timeout for livesettings if you want to make them different
+LIVESETTINGS_CACHE_TIMEOUT = CACHES['default']['TIMEOUT']
+CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+CACHE_MIDDLEWARE_SECONDS = 600

@@ -1,0 +1,14 @@
+{% trans %}Greetings from {{ site_name }}{% endtrans %},
+
+{% trans %}To recover your account, please follow the link below:{% endtrans %}
+
+{{ validation_link }}
+
+{% trans %}If you are unable to follow the link, copy/paste this key into the form:{% endtrans %}
+
+{{ key }}
+
+{% trans %}If you believe that this message was sent erroneously - no further action is needed. We apologize for any inconvenience.{% endtrans %}
+
+{% trans %}Sincerely,
+{{ site_name }} Administrator{% endtrans %}

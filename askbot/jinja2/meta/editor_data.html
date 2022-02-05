@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    {# data necessary for the post editor, goes into endjs block #}
+    askbot['settings']['tagsAreRequired'] = {{ settings.TAGS_ARE_REQUIRED|as_js_bool }}
+    askbot['settings']['maxTagLength'] = {{ settings.MAX_TAG_LENGTH }};
+    askbot['messages']['maxTagLength'] = "{{ ngettext('each tag must be shorter than %(max_chars)s character', 'each tag must be shorter than %(max_chars)s characters', settings.MAX_TAG_LENGTH)|format(max_chars=settings.MAX_TAG_LENGTH)|escapejs }}";
+    askbot['settings']['maxTagsPerPost'] = {{ settings.MAX_TAGS_PER_POST }};
+    askbot['messages']['maxTagsPerPost'] = "{{ ngettext('please use %(tag_count)s tag', 'please use %(tag_count)s tags or less', settings.MAX_TAGS_PER_POST)|format(tag_count=settings.MAX_TAGS_PER_POST)|escapejs }}";
+    askbot['messages']['tagLimits'] = "{{ gettext('please use up to %(tag_count)s tags, less than %(max_chars)s characters each')|format(tag_count=settings.MAX_TAGS_PER_POST, max_chars=settings.MAX_TAG_LENGTH)|escapejs }}";
+    askbot['urls']['upload'] = '{{ url('upload') }}';
+    askbot['settings']['minTitleLength'] = {{ settings.MIN_TITLE_LENGTH }};
+    askbot['settings']['minQuestionBodyLength'] = {{ settings.MIN_QUESTION_BODY_LENGTH }};
+    askbot['settings']['minAnswerBodyLength'] = {{ settings.MIN_ANSWER_BODY_LENGTH }};
+    askbot['settings']['minCommentBodyLength'] = {{ settings.MIN_COMMENT_BODY_LENGTH }};
+    askbot['settings']['tag_editor'] = '{{ tag_editor_settings|escapejs }}';
+    askbot['settings']['tinyMCEPlugins'] = JSON.parse('{{ settings.TINYMCE_PLUGINS|as_json }}');
+</script>

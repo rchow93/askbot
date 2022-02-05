@@ -1,0 +1,7 @@
+factory_boy
+coverage
+dj_database_url
+tblib
+-e git+https://github.com/dcollinsn/lamson#egg=lamson
+django-lamson
+psycopg2-binary

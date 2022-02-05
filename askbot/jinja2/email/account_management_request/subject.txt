@@ -1,0 +1,1 @@
+{% trans %}Attention: {{username}} requested your action on their account{% endtrans %}

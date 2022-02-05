@@ -1,0 +1,55 @@
+{% extends "user_profile/user.html" %}
+<!-- user_moderate.html -->
+{% block profilesection %}
+    {% trans %}manage account{% endtrans %}
+{% endblock %}
+{% block usercontent %}
+<div style="margin-top: 1em">
+    <p>{% trans %}To delete this account or obtain its data, please
+    use one of the options below{% endtrans %}</p>
+</div>
+<div id="data-backups-container" style="margin-top: 1em;{% if not backup_file_names %} display: none;{% endif %}">
+    <p>{% trans %}Download backup files:{% endtrans %}</p>
+    <ul id="data-backups" style="list-style: none; margin-left: 0">
+        {% for file_name in backup_file_names %}
+	<li><a href="{{ url('download_user_data', id=view_user.pk, file_name=file_name) }}">{{ file_name }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+<form style="margin-top: 1em" method="post">{{ csrf_input }}
+    <input type="hidden" name="sort" value="manage-account"/>
+    {% if request.user.can_terminate_account(view_user) or request.user.pk == view_user.pk %}
+        <input
+            id="js-remove-account"
+            type="submit"
+            name="terminate_account"
+            {% if request.user.can_terminate_account(view_user) %}
+                value="{% trans %}Remove account{% endtrans %}"
+            {% elif request.user.pk == view_user.pk %}
+                value="{% trans %}Ask to remove account{% endtrans %}"
+            {% endif %}
+        />
+    {% endif %}
+    {% if request.user.can_anonymize_account(view_user) %}
+        <input
+            id="js-anonymize-account"
+            type="submit"
+            name="anonymize_account"
+            value="{% trans %}Anonymize data and disable account{% endtrans %}"
+        />
+    {% endif %}
+    {% if exporting %}
+    	<span id="exporting">{% trans %}Exporting{% endtrans %}&hellip;</span>
+    {% else %}
+        <input type="submit"
+            name="export_data"
+            value="{% trans %}Export data{% endtrans %}" />
+    {% endif %}
+</form>
+{% endblock %}
+{% block userjs %}
+    <script type="text/javascript">
+        askbot['data']['anonUserName'] = '{{ anon_user_name|escapejs }}';
+    </script>
+    <script type="text/javascript" src="{{ '/js/user/manage_account.js'|media }}"></script>
+{% endblock %}
